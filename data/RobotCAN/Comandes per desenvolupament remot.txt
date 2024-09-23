@@ -1,0 +1,176 @@
+The first thing you will need to do is make sure you have run the keygen command to generate the keys:
+
+ssh-keygen -t rsa
+ssh-keygen -p -m PEM
+
+Then use this command to push the key to the remote server, modifying it to match your server name.
+
+cat ~/.ssh/id_rsa.pub | ssh pi@192.168.1.141 'cat >> .ssh/authorized_keys'
+
+
+sudo systemctl stop serial-getty@ttyS0.service
+sudo chmod 666 /dev/ttyS0
+
+export DISPLAY=:10
+
+41.389116
+2.149551
+
+
+time.strftime("%m%d%H%M")
+
+C:\Users\esteve\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.9_qbz5n2kfra8p0\LocalCache\local-packages\Python39\Scripts
+
+Instala el software del display de 7" del comandament amb pantalla
+git clone https://github.com/goodtft/LCD-show.git
+sudo chmod -R 755 LCD-show
+cd LCD-show
+sudo ./LCD7C-show
+
+Compila els dissenys de QT 
+pyuic5 -o comandamentView.py comandamentView.ui
+
+
+per instalar a python
+pip install pynmeagps	#no cal
+python3 -m pip install --upgrade pyubx2	#no cal
+sudo apt-get install python3-pyqt5
+sudo apt install python3-rasterio
+sudo apt install python3-matplotlib
+pip install utm
+pip install geojson
+pip install ble-serial	#bluetooth serie
+
+sudo apt-get install libatlas-base-dev
+pip3 uninstall numpy  # remove previously installed version
+apt install python3-numpy
+
+sudo apt-get install gdal-bin
+sudo apt-get install libgdal-dev
+pip install shapely --no-binary shapely
+sudo apt install python3-rtree
+# pip install rtree
+pip install geopandas
+sudo apt install python3-geopandas
+pip install python-can
+pip install smbus2
+
+pip3 install simple-pid
+#web
+pip install Flask	#no cal, ja ve
+pip install flask-sock
+
+# adafruit blinka, per usar llibrerie de Adafruit i CircuitPython
+sudo pip install --upgrade setuptools
+sudo pip install --upgrade adafruit-python-shell
+wget https://raw.githubusercontent.com/adafruit/Raspberry-Pi-Installer-Scripts/master/raspi-blinka.py
+sudo python raspi-blinka.py
+# conversor ADC
+sudo pip install adafruit-circuitpython-ads1x15
+
+Engegar app al arrancar RaspberryPi
+copiar el fitxer motors.desktop a /etc/xdg/autostart/ i donar permis d'execució
+
+Engegar app al arrancar OrangePi
+copiar el fitxer motors.desktop a /etc/xdg/autostart/ i donar permis d'execució
+
+Arrencar un comanda sudo sense demanar password
+Crear fitxer iniserials.sh
+	#!/bin/bash
+	sudo systemctl stop serial-getty@ttyS0
+	sudo chmod 666 /dev/ttyS0
+	sudo systemctl stop serial-getty@ttyS3
+	sudo chmod 666 /dev/ttyS3
+	sudo chmod 666 /dev/i2c-5
+	
+sudo chown root:root /home/ro/Rovinya/RobotCAN/iniserials.sh
+sudo chmod 700 /home/ro/Rovinya/RobotCAN/iniserials.sh
+
+editar el fitxer de sudoers
+sudo visudo
+sota la linia
+%sudo   ALL=(ALL:ALL) ALL
+afegir
+ro ALL=(ALL) NOPASSWD: /home/ro/Rovinya/RobotCAN/iniserials.sh
+
+desde python es pot cridar
+os.system('sudo /home/ro/Rovinya/RobotCAN/iniserials,sh')
+
+l
+
+
+Instal·lacio CAN
+editar: /boot/config.txt
+afegir:
+dtoverlay=mcp2515-can0,oscillator=8000000,interrupt=25 
+
+comprobar amb: dmesg | grep can0
+ha de sortir:  mcp251x spi0.0 can0: MCP2515 successfully initialized.
+executar: sudo /sbin/ip link set can0 up type can bitrate 125000
+
+arranc automàtic
+editar: /etc/network/interfaces
+afegir:
+auto can0
+iface can0 can static
+        bitrate 125000
+
+o afegir:
+auto can0
+iface can0 inet manual
+    pre-up /sbin/ip link set can0 type can bitrate 125000 triple-sampling on
+restart-ms 100
+    up /sbin/ifconfig can0 up
+    down /sbin/ifconfig can0 down
+
+instalar: sudo apt install can-utils
+pip install python-can
+
+Instalacio CANalyst-II
+pip install canalystii o be pip install "python-can[canalystii]"
+per afegir permisos cal:
+usant lsusb copiar el idVendor i el idProduct
+crear el fitxer /etc/udev/rules.d/50-usb-can.rules i posar-hi
+SUBSYSTEM=="usb", ATTRS{idVendor}=="04d8", ATTRS{idProduct}=="0053",GROUP="ro", MODE="0666"
+
+
+Instalacio port serie: uart5 tx-io12 rx-io13
+editar: /boot/config.txt
+afegir: dtoverlay=uart5
+
+aixo genera el dispositiu /dev/ttyAMA1
+
+
+
+
+"%d, %0.8f, %0.8f" %(self.numord, parsed_data.lon, parsed_data.lat)
+
+scrollbar = myListView.verticalScrollBar();
+ if(scrollbar == NULL || scrollbar.value() == scrollbar.maximum())
+ {
+  addItem();
+  myListView.scrollToBottom();
+ } else {
+  addItem();
+ }
+
+Position data
+The driver will automatically detect the position format from the first NMEA position sentence supported.
+Driver will decode following NMEA sentences, containing (GPS or RTK) position data:
+$--GGA,
+$--RMC,
+$--GGK, or
+$--GLL
+Quality
+Driver can be used to decode quality information from NMEA sentences.
+It will automatically decode the supported NMEA quality sentences and copy the values to the previously decoded position data buffer.
+The driver decodes:
+$--GST,
+$--GSA
+$PDAS,QUAL,
+Heading
+Driver will automatically detect the heading format from the first NMEA gyro string.
+The driver is able to decode heading from NMEA sentences:
+$--HDT,
+$--HDG,
+$--HDM

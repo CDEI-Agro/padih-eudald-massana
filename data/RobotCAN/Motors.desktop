@@ -1,0 +1,8 @@
+[Desktop Entry]
+
+Name=Control Rovinya
+Comment=Motors Rovinya
+Exec=/home/ro/Rovinya/RobotCAN/motors.sh
+Icon=/usr/share/icons/gnome/48x48/actions/system-run.png
+Terminal=true
+Type=Application

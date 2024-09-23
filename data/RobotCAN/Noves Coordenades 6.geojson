@@ -1,0 +1,87 @@
+{
+    "type": "FeatureCollection",
+    "features": [
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    1.78166521,
+                    41.38135766
+                ]
+            },
+            "properties": {
+                "ord": "1"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    1.781804330000001,
+                    41.38138294
+                ]
+            },
+            "properties": {
+                "ord": "2"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    1.78181702,
+                    41.38136229
+                ]
+            },
+            "properties": {
+                "ord": "3"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    1.7816843,
+                    41.38133653
+                ]
+            },
+            "properties": {
+                "ord": "4"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    1.7816912010312083,
+                    41.381307990963
+                ]
+            },
+            "properties": {
+                "ord": "5",
+                "dist": "unset",
+                "ac": "unset",
+                "al": "unset",
+                "q": "unset"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    1.78179389,
+                    41.38133357
+                ]
+            },
+            "properties": {
+                "ord": "6"
+            }
+        }
+    ]
+}

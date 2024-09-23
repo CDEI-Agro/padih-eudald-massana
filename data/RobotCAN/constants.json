@@ -1,0 +1,14 @@
+{
+    "Kpa": 20.0,
+    "Kda": 30.0,
+    "Kia": 0.0,
+    "Kp": 4.0,
+    "Kd": 4.0,
+    "Ki": 0.0,
+    "distinterp": 5.0,
+    "distcaptura": 0.8,
+    "distmindesti": 0.15,
+    "maxrpm": 2000.0,
+    "maxrpmgir": 300.0,
+    "angleminim": 1.0
+}

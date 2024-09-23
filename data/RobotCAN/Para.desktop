@@ -1,0 +1,8 @@
+[Desktop Entry]
+
+Name=Para
+Comment=Atura Rovinya
+Exec=/home/ro/Rovinya/RobotCAN/para.sh
+Icon=/usr/share/icons/gnome/48x48/actions/stop.png
+Terminal=True
+Type=Application
