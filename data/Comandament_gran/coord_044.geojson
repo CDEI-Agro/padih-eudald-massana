@@ -1,0 +1,107 @@
+{
+    "type": "FeatureCollection",
+    "features": [
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    1.7825236,
+                    41.3815041
+                ]
+            },
+            "properties": {
+                "ord": "1",
+                "dist": "4.19",
+                "ac": "44.85",
+                "al": "44.85",
+                "q": "4"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    1.7824885,
+                    41.3815117
+                ]
+            },
+            "properties": {
+                "ord": "2",
+                "dist": "3.05",
+                "ac": "286.13",
+                "al": "286.13",
+                "q": "4"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    1.7824832,
+                    41.3815269
+                ]
+            },
+            "properties": {
+                "ord": "3",
+                "dist": "1.75",
+                "ac": "345.54",
+                "al": "345.54",
+                "q": "4"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    1.7824931,
+                    41.3815346
+                ]
+            },
+            "properties": {
+                "ord": "4",
+                "dist": "1.18",
+                "ac": "44.22",
+                "al": "44.22",
+                "q": "4"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    1.7825178,
+                    41.3815346
+                ]
+            },
+            "properties": {
+                "ord": "5",
+                "dist": "2.06",
+                "ac": "90.00",
+                "al": "90.00",
+                "q": "4"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    1.7825477,
+                    41.3815269
+                ]
+            },
+            "properties": {
+                "ord": "6",
+                "dist": "2.64",
+                "ac": "108.77",
+                "al": "108.77",
+                "q": "4"
+            }
+        }
+    ]
+}
