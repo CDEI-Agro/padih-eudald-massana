@@ -1,0 +1,71 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+    <ros2_control name="agri_bot_hardware" type="system">
+        <xacro:unless value="$(arg simulation)">
+            <xacro:unless value="$(arg use_mock_hardware)">
+                <hardware>
+                    <plugin>diffdrive_agribot/DiffDriveAgribotHardware</plugin>
+                    <param name="left_wheel_name">drivewhl_l_joint</param>
+                    <param name="right_wheel_name">drivewhl_r_joint</param>
+                    <param name="transmission_ratio_wheels">33.33333</param>
+                    <param name="wheel_radius">0.21</param>
+                    <param name="encoder_ticks_per_rev">4096</param>
+                    <param name="can_mode">0</param>
+                    <param name="can_filter">1</param>
+                    <param name="can_loop_time">500</param>
+
+
+                    <!-- setting robot ip based on the id. 1:green, 2: red-->
+                    <xacro:if value="${robot_id == 1}">
+                        <param name="plc_ip">192.168.1.150</param>
+                        <param name="pc_ip">192.168.1.151</param>
+                    </xacro:if>
+
+                    <xacro:if value="${robot_id == 2}">
+                        <param name="plc_ip">192.168.13.220</param>
+                        <param name="pc_ip">192.168.13.9</param>
+                    </xacro:if>
+                </hardware>
+            </xacro:unless>
+            <xacro:if value="$(arg use_mock_hardware)">
+                <hardware>
+                    <plugin>mock_components/GenericSystem</plugin>
+                    <param name="calculate_dynamics">true</param>
+                </hardware>
+            </xacro:if>
+        </xacro:unless>
+
+        <xacro:if value="$(arg simulation)">
+            <hardware>
+                <plugin>gazebo_ros2_control/GazeboSystem</plugin>
+            </hardware>
+        </xacro:if>
+
+        <joint name="drivewhl_l_joint">
+            <command_interface name="velocity"/>
+            <state_interface name="position"/>
+            <state_interface name="velocity"/>
+        </joint>
+        <joint name="drivewhl_r_joint">
+            <command_interface name="velocity"/>
+            <state_interface name="position"/>
+            <state_interface name="velocity"/>
+        </joint>
+    </ros2_control>
+
+    <xacro:if value="$(arg simulation)">
+
+        <!-- The Gazebo plugin launches the controller manager with it. With real hardware we would need
+        to launch a controller manager before launchin controllers-->
+        <gazebo>
+            <plugin name="gazebo_ros2_control" filename="libgazebo_ros2_control.so">
+                <parameters>$(find agri_bot)/config/diffdrive_controllers.yaml</parameters>
+                <ros>
+                    <remapping>/diffbot_base_controller/odom:=/controller/odometry</remapping>
+                </ros>
+            </plugin>
+        </gazebo>
+    </xacro:if>
+
+</robot>

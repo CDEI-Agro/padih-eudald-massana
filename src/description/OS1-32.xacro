@@ -1,0 +1,191 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="OS1-32">
+
+
+    <!-- ROS and Gazebo configuration -->
+    <xacro:property name="os_sensor_link" value="os_sensor" />
+    <xacro:property name="os_lidar_link" value="os_lidar" />
+    <xacro:property name="os_imu_link" value="os_imu" />
+    <xacro:property name="topic_points" value="/ouster/points" />
+    <xacro:property name="topic_scan" value="/ouster/scan" />
+    <xacro:property name="topic_imu" value="/ouster/imu" />
+
+    <!-- Optical and IMU properties -->
+    <xacro:property name="lidar_hz" value="10" />
+    <xacro:property name="imu_hz" value="30" />
+    <xacro:property name="num_lasers" value="3" />
+    <xacro:property name="samples" value="1024" />
+    <xacro:property name="min_range" value="0.5" />
+    <xacro:property name="max_range" value="90" />
+    <xacro:property name="range_resolution" value="0.001" />
+    <xacro:property name="lidar_noise" value="0.005" />
+    <xacro:property name="imu_noise" value="0.005" />
+    <xacro:property name="min_angle" value="-${M_PI}" />
+    <xacro:property name="max_angle" value="${M_PI}" />
+    <xacro:property name="vfov_above" value="${22.5*M_PI/180}" />
+    <xacro:property name="vfov_below" value="${-22.5*M_PI/180}" />
+
+    <!-- Mechanical properties -->
+    <xacro:property name="lidar_mass" value="${0.495}" />
+    <xacro:property name="lidar_radius" value="${0.0435}" />
+    <xacro:property name="lidar_height" value="${0.0742}" />
+
+    <!-- Define 3 links (sensor, lidar, imu) and their 3 joints -->
+    <link name="${os_sensor_link}">
+        <xacro:cylinder_inertia m="${lidar_mass}" r="${lidar_radius}" h="${lidar_height}">
+            <origin xyz="0 0 ${lidar_height/2}" rpy="0 0 0" />
+        </xacro:cylinder_inertia>
+        <collision name="base_collision">
+            <origin xyz="0 0 0" rpy="0 0 0" />
+            <geometry>
+                <!-- Loading the mesh as collision is not necessary and it rises problems when loading -->
+                <!-- <mesh filename="package://agri_bot/src/meshes/os1_32.dae" /> -->
+                <cylinder radius="${lidar_radius}" length="${lidar_height}" />
+            </geometry>
+        </collision>
+        <visual name="base_visual">
+            <origin xyz="0 0 0" rpy="0 0 0" />
+            <geometry>
+                <mesh filename="package://agri_bot/src/meshes/os1_32.STL" scale="0.001 0.001 0.001"/>
+            </geometry>
+        </visual>
+    </link>
+
+    <link name="${os_lidar_link}" />
+
+    <link name="${os_imu_link}" />
+
+    <joint name="${os_sensor_link}_joint" type="fixed">
+        <parent link="lidar_support_link" />
+        <child link="${os_sensor_link}" />
+        <origin xyz="0.105 0 0.6525" rpy="0 0 0" />
+    </joint>
+
+    <joint name="${os_imu_link}_joint" type="fixed">
+        <parent link="${os_sensor_link}" />
+        <child link="${os_imu_link}" />
+        <origin xyz="0.006253 -0.011775 0.007645" rpy="0 0 0" />
+    </joint>
+
+    <joint name="${os_lidar_link}_joint" type="fixed">
+        <parent link="${os_sensor_link}" />
+        <child link="${os_lidar_link}" />
+        <origin xyz="0 0 ${lidar_height/2}" rpy="0 0 ${M_PI}" />
+    </joint>
+
+    <!-- Lidar PoinCloud2 plugin -->
+    <gazebo reference="${os_lidar_link}">
+        <material>Gazebo/Grey</material>
+        <sensor type="ray" name="${os_lidar_link}">
+            <visualize>false</visualize>
+            <update_rate>${lidar_hz}</update_rate>
+            <ray>
+                <scan>
+                    <horizontal>
+                        <samples>${samples}</samples>
+                        <resolution>1</resolution>
+                        <min_angle>${min_angle}</min_angle>
+                        <max_angle>${max_angle}</max_angle>
+                    </horizontal>
+                    <vertical>
+                        <samples>${num_lasers}</samples>
+                        <resolution>1</resolution>
+                        <min_angle>${vfov_below}</min_angle>
+                        <max_angle>${vfov_above}</max_angle>
+                    </vertical>
+                </scan>
+                <range>
+                    <min>${min_range}</min>
+                    <max>${max_range}</max>
+                    <resolution>${range_resolution}</resolution>
+                </range>
+                <noise>
+                    <type>gaussian</type>
+                    <mean>0.0</mean>
+                    <stddev>${lidar_noise}</stddev>
+                </noise>
+            </ray>
+            <plugin name="${os_lidar_link}" filename="libgazebo_ros_velodyne_laser.so">
+                <ros>
+                    <namespace>/${os_sensor_link}</namespace>
+                    <remapping>~/out:=${topic_points}</remapping>
+                </ros>
+                <frame_name>${os_lidar_link}</frame_name>
+                <organize_cloud>true</organize_cloud>
+                <min_range>${min_range}</min_range>
+                <max_range>${max_range}</max_range>
+                <gaussian_noise>${lidar_noise}</gaussian_noise>
+            </plugin>
+        </sensor>
+    </gazebo>
+
+    <!-- LaserScan plugin -->
+    <gazebo reference="${os_lidar_link}">
+        <sensor name="${os_lidar_link}_scan" type="ray">
+            <always_on>true</always_on>
+            <visualize>false</visualize>
+            <update_rate>${lidar_hz}</update_rate>
+            <ray>
+                <scan>
+                    <horizontal>
+                        <samples>${samples}</samples>
+                        <resolution>1</resolution>
+                        <min_angle>${min_angle}</min_angle>
+                        <max_angle>${max_angle}</max_angle>
+                    </horizontal>
+                </scan>
+                <range>
+                    <min>${min_range}</min>
+                    <max>${max_range}</max>
+                    <resolution>${range_resolution}</resolution>
+                </range>
+                <noise>
+                    <type>gaussian</type>
+                    <mean>0.0</mean>
+                    <stddev>${lidar_noise}</stddev>
+                </noise>
+            </ray>
+            <plugin name="${os_lidar_link}_scan" filename="libgazebo_ros_ray_sensor.so">
+                <ros>
+                    <namespace>$(arg namespace)</namespace>
+                    <remapping>~/out:=${topic_scan}</remapping>
+                </ros>
+                <output_type>sensor_msgs/LaserScan</output_type>
+                <frame_name>${os_lidar_link}</frame_name>
+            </plugin>
+        </sensor>
+    </gazebo>
+
+    <!-- IMU plugin -->
+    <gazebo reference="${os_imu_link}">
+        <sensor name="${os_imu_link}" type="imu">
+            <always_on>true</always_on>
+            <update_rate>${imu_hz}</update_rate>
+            <imu>
+                <rate>${imu_hz}</rate>
+                <accel>
+                    <noise>
+                        <type>gaussian</type>
+                        <rate>${imu_noise}</rate>
+                        <accel>X Y Z</accel>
+                    </noise>
+                </accel>
+                <gyro>
+                    <noise>
+                        <type>gaussian</type>
+                        <rate>${imu_noise}</rate>
+                        <gyro>X Y Z</gyro>
+                    </noise>
+                </gyro>
+            </imu>
+            <plugin name="imu" filename="libgazebo_ros_imu_sensor.so">
+                <ros>
+                    <namespace>/${os_sensor_link}</namespace>
+                    <remapping>~/out:=${topic_imu}</remapping>
+                </ros>
+                <frame_name>${os_imu_link}</frame_name>
+            </plugin>
+        </sensor>
+    </gazebo>
+
+</robot>

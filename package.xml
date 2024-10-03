@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<?xml-model href="http://download.ros.org/schema/package_format3.xsd" schematypens="http://www.w3.org/2001/XMLSchema"?>
+<package format="3">
+  <name>agri_bot</name>
+  <version>0.0.0</version>
+  <description>TODO: Package description</description>
+  <maintainer email="zain@todo.todo">zain</maintainer>
+  <license>TODO: License declaration</license>
+
+  <depend>rclcpp</depend>
+  <depend>rclpy</depend>
+  <depend>gazebo_ros</depend>
+  <depend>xacro</depend>
+  <depend>ros2_control</depend>
+  <depend>ros2_controllers</depend>
+  <depend>gazebo_ros2_control</depend>
+  <depend>twist_mux</depend>
+  <depend>joy_linux</depend>
+  <depend>velodyne_gazebo_plugins</depend>
+  <depend>robot_localization</depend>
+
+  <buildtool_depend>ament_cmake</buildtool_depend>
+  <buildtool_depend>ament_cmake_python</buildtool_depend>
+
+  <test_depend>ament_lint_auto</test_depend>
+  <test_depend>ament_lint_common</test_depend>
+
+  <export>
+    <build_type>ament_cmake</build_type>
+  </export>
+</package>

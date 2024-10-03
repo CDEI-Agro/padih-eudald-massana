@@ -1,0 +1,58 @@
+<?xml version="1.0"?>
+<robot name="agri_bot" xmlns:xacro="http://ros.org/wiki/xacro">
+
+    <link name="gps_link">
+        <visual>
+            <geometry>
+                <box size="0.1 0.1 0.1"/>
+            </geometry>
+            <material name="yellow"/>
+        </visual>
+
+        <collision>
+            <geometry>
+                <box size="0.1 0.1 0.1"/>
+            </geometry>
+        </collision>
+        <xacro:box_inertia m="0.1" w="0.1" d="0.1" h="0.1"/>
+    </link>
+
+    <joint name="gps_joint" type="fixed">
+        <parent link="turret_link"/>
+        <child link="gps_link"/>
+        <origin xyz="0.457 0.420 ${turret_height/2}" rpy="0 0 0"/>
+    </joint>
+
+    <gazebo reference="gps_link">
+        <material>Gazebo/Yellow</material>
+        <sensor name="tb3_gps" type="gps">
+            <always_on>true</always_on>
+            <update_rate>5</update_rate>
+            <pose>0 0 0 0 0 0</pose>
+            <gps>
+                <position_sensing>
+                    <horizontal>
+                        <noise type="gaussian">
+                            <mean>0.0</mean>
+                            <stddev>0.01</stddev>
+                        </noise>
+                    </horizontal>
+                    <vertical>
+                        <noise type="gaussian">
+                            <mean>0.0</mean>
+                            <stddev>0.01</stddev>
+                        </noise>
+                    </vertical>
+                </position_sensing>
+            </gps>
+            <plugin name="my_gps_plugin" filename="libgazebo_ros_gps_sensor.so">
+                <ros>
+                    <remapping>~/out:=/gps/fix</remapping>
+                </ros>
+                <frame_name>gps_link</frame_name>
+            </plugin>
+        </sensor>
+    </gazebo>
+
+
+</robot>
