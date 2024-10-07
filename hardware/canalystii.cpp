@@ -53,7 +53,10 @@ bool CANalystii::start_can_device(int channel_index){
 // Function to send CAN messages
 void CANalystii::send_can_message(int channel_index, double left_wheel_vel, double right_wheel_vel) {
 
-    RCLCPP_INFO(rclcpp::get_logger("DiffDriveAgribotHardware"), "left and right wheel velocities  %f %f", left_wheel_vel, right_wheel_vel);
+    // For debugginh
+
+    // RCLCPP_INFO(rclcpp::get_logger("DiffDriveAgribotHardware"), "left and right wheel velocities  %f %f", left_wheel_vel, right_wheel_vel);
+    
     VCI_CAN_OBJ sendMsg;
     memset(&sendMsg, 0, sizeof(VCI_CAN_OBJ));
 
@@ -74,6 +77,8 @@ void CANalystii::send_can_message(int channel_index, double left_wheel_vel, doub
     sendMsg.Data[7] = 0x88;
 
     int result = VCI_Transmit(vci_device_type_, vci_device_ind_, channel_index, &sendMsg, 1);
+
+    // For debugging
     // if (result == 1) {
     //     RCLCPP_INFO(rclcpp::get_logger("DiffDriveAgribotHardware"), "Message written");
 

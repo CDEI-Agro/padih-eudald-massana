@@ -176,41 +176,14 @@ namespace diffdrive_agribot
       RCLCPP_INFO(rclcpp::get_logger("DiffDriveAgribotHardware"), "Started CAN Device");
     }
 
-      // Start the CAN send thread
-    stop_can_thread_ = false;
-    can_send_thread_ = std::thread(&DiffDriveAgribotHardware::can_send_loop, this);
- 
     return hardware_interface::CallbackReturn::SUCCESS;
   }
-
-  void DiffDriveAgribotHardware::can_send_loop() {
-  while (!stop_can_thread_) {
-    {
-      // Lock the mutex to safely access shared data
-      std::lock_guard<std::mutex> lock(can_mutex_);
-
-      // Send CAN messages for the wheel and turret commands
-      canalystii_.send_can_message(4, wheel_l_.cmd, wheel_r_.cmd );
-
-    }
-
-    // Sleep for a small amount of time to avoid busy-waiting (e.g., 10ms)
-    std::this_thread::sleep_for(std::chrono::milliseconds(cfg_.can_loop_time));
-  }
-
-  RCLCPP_INFO(rclcpp::get_logger("DiffDriveAgribotHardware"), "CAN send thread stopped.");
-}
 
   hardware_interface::CallbackReturn DiffDriveAgribotHardware::on_deactivate(
       const rclcpp_lifecycle::State & /*previous_state*/)
   {
     RCLCPP_INFO(rclcpp::get_logger("DiffDriveAgribotHardware"), "Deactivating ...please wait...");
     
-      // Stop the CAN thread
-    stop_can_thread_ = true;
-    if (can_send_thread_.joinable()) {
-    can_send_thread_.join();  // Wait for the thread to finish
-    }
 
     RCLCPP_INFO(rclcpp::get_logger("DiffDriveAgribotHardware"), "Successfully deactivated CAN thread!");
 
@@ -220,12 +193,6 @@ namespace diffdrive_agribot
   hardware_interface::CallbackReturn DiffDriveAgribotHardware::on_shutdown(
       const rclcpp_lifecycle::State & /*previous_state*/)
   {
-
-      // Stop the CAN thread
-  stop_can_thread_ = true;
-  if (can_send_thread_.joinable()) {
-    can_send_thread_.join();  // Wait for the thread to finish
-  }
 
   RCLCPP_INFO(rclcpp::get_logger("DiffDriveAgribotHardware"), "Successfully shutdown.");
 
@@ -254,6 +221,11 @@ namespace diffdrive_agribot
       // if we need to do some computations with the wheel commands we will do them here.
       // wheel_l_cmd_ = wheel_l_.cmd;
       // wheel_r_cmd_ = wheel_r_.cmd;
+
+    canalystii_.send_can_message(0, wheel_l_.cmd, wheel_r_.cmd );
+    std::this_thread::sleep_for(std::chrono::milliseconds(cfg_.can_loop_time));
+
+
     return hardware_interface::return_type::OK;
   }
 

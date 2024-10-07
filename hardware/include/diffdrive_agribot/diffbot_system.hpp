@@ -104,12 +104,6 @@ namespace diffdrive_agribot
     int m_initial_encoder_ticks_l;
     int m_initial_encoder_ticks_r;
     int m_initial_encoder_ticks_turret;
-
-    std::thread can_send_thread_;   // Thread for sending CAN messages
-    std::mutex can_mutex_;          // Mutex to protect shared CAN data
-    std::atomic<bool> stop_can_thread_;  // Flag to stop the CAN thread
-
-    void can_send_loop();
   };
 
 } // namespace diffdrive_agribot
