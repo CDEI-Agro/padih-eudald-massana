@@ -19,7 +19,6 @@
 #include <limits>
 #include <memory>
 #include <vector>
-#include <thread>
 
 #include "hardware_interface/types/hardware_interface_type_values.hpp"
 #include "rclcpp/rclcpp.hpp"
@@ -38,6 +37,7 @@ namespace diffdrive_agribot
 
     cfg_.left_wheel_name = info_.hardware_parameters["left_wheel_name"];
     cfg_.right_wheel_name = info_.hardware_parameters["right_wheel_name"];
+    cfg_.wheel_radius = std::stof(info_.hardware_parameters["wheel_radius"]);
     cfg_.transmission_ratio_wheels = std::stof(info_.hardware_parameters["transmission_ratio_wheels"]);
     cfg_.encoder_ticks_per_rev = std::stoi(info_.hardware_parameters["encoder_ticks_per_rev"]);
     cfg_.can_mode = std::stoi(info_.hardware_parameters["can_mode"]);
@@ -215,14 +215,10 @@ namespace diffdrive_agribot
       const rclcpp::Time & /*time*/, const rclcpp::Duration &period)
   {
 
-          // these commands will be read in the can_Send_loop and sent to can bus at the can_send_loop's freqeuncy (cfg._can_loop_time)
-      // std::lock_guard<std::mutex> lock(can_mutex_);
+      int wheel_l_rpm =  static_cast<int>((wheel_l_.cmd*60)/(2*M_PI*cfg_.wheel_radius));
+      int wheel_r_rpm =  static_cast<int>((wheel_r_.cmd*60)/(2*M_PI*cfg_.wheel_radius));
 
-      // if we need to do some computations with the wheel commands we will do them here.
-      // wheel_l_cmd_ = wheel_l_.cmd;
-      // wheel_r_cmd_ = wheel_r_.cmd;
-
-    canalystii_.send_can_message(0, wheel_l_.cmd, wheel_r_.cmd );
+    canalystii_.send_can_message(0, wheel_l_rpm, wheel_r_rpm);
     std::this_thread::sleep_for(std::chrono::milliseconds(cfg_.can_loop_time));
 
 

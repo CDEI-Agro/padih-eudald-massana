@@ -48,6 +48,7 @@ namespace diffdrive_agribot
       std::string left_wheel_name = "";
       std::string right_wheel_name = "";
       float transmission_ratio_wheels = 0;
+      float wheel_radius = 0;
       int encoder_ticks_per_rev = 0;
       int can_mode = 0;
       int can_filter = 0;
