@@ -85,6 +85,7 @@ install(PROGRAMS
     python_nodes/gps_waypoint_logger.py
     python_nodes/interactive_waypoint_follower.py
     python_nodes/logged_waypoint_follower.py
+    python_nodes/joy_gps_adapter.py
     DESTINATION lib/${PROJECT_NAME})
 
 if(BUILD_TESTING)

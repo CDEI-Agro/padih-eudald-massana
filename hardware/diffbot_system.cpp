@@ -215,8 +215,14 @@ namespace diffdrive_agribot
       const rclcpp::Time & /*time*/, const rclcpp::Duration &period)
   {
 
+      RCLCPP_INFO(rclcpp::get_logger("DiffDriveAgribotHardware"), "Right and left wheel velocitites  %f   %f", wheel_r_.cmd, wheel_l_.cmd);
+
+
       int wheel_l_rpm =  static_cast<int>((wheel_l_.cmd*60)/(2*M_PI*cfg_.wheel_radius));
       int wheel_r_rpm =  static_cast<int>((wheel_r_.cmd*60)/(2*M_PI*cfg_.wheel_radius));
+
+      RCLCPP_INFO(rclcpp::get_logger("DiffDriveAgribotHardware"), "Right and left wheel RPMs  %d   %d", wheel_r_rpm, wheel_l_rpm);
+
 
     canalystii_.send_can_message(0, wheel_l_rpm, wheel_r_rpm);
     std::this_thread::sleep_for(std::chrono::milliseconds(cfg_.can_loop_time));
