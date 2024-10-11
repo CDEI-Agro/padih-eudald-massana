@@ -16,6 +16,6 @@
     <xacro:include filename="padih_bot_core.xacro"/>
     <xacro:include filename="gps.xacro"/>
     <xacro:include filename="OS1-32.xacro"/>
-    <xacro:include filename="agribot_diffdrive_control.xacro"/>
+    <xacro:include filename="padih_bot_diffdrive_control.xacro"/>
 
 </robot>
