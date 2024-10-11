@@ -81,7 +81,6 @@ ament_python_install_package(${PROJECT_NAME})
 
 # Install python executables
 install(PROGRAMS
-    python_nodes/turret_joy.py
     python_nodes/gps_waypoint_logger.py
     python_nodes/interactive_waypoint_follower.py
     python_nodes/logged_waypoint_follower.py
