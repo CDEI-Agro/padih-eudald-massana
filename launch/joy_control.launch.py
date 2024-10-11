@@ -80,38 +80,12 @@ def generate_launch_description():
                           'global_localizer': global_localizer}.items(),
     )
 
-    # turret_joy = Node(
-    #     package="agri_bot",
-    #     executable="turret_joy.py",
-    #     name='turret_joy',
-    #     parameters=[general_params,]
-    # )
-
     joystick_and_gps_adapter = Node(
         package="agri_bot",
         executable="joy_gps_adapter.py",
         name='turret_joy',
         parameters=[general_params,]
     )
-
-    # # Launch joystick driver and teleop node
-    # joy_driver = Node(
-    #     package='joy_linux',
-    #     executable='joy_linux_node',
-    #     name='joy_node',
-    #     parameters=[{
-    #         'dev': "/dev/input/js0",
-    #         'deadzone': 0.3,
-    #         'autorepeat_rate': 20.0,
-    #     }]
-    # )
-    # teleop_twist_joy_node = Node(
-    #     package='teleop_twist_joy',
-    #     executable='teleop_node',
-    #     name='teleop_twist_joy_node',
-    #     parameters=[PathJoinSubstitution([package_path, 'config/general_params.yaml'])],
-    #     remappings={('/cmd_vel', 'cmd_vel_joy')},
-    # )
 
     # Twist mulitplexer: sets priotities on command velocities coming from different sources
     # useful to have control over the robot with both joystick and the nav2 stack
