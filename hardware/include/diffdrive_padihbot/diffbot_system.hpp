@@ -12,8 +12,8 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-#ifndef DIFFDRIVE_AGRIBOT__DIFFBOT_SYSTEM_HPP_
-#define DIFFDRIVE_AGRIBOT__DIFFBOT_SYSTEM_HPP_
+#ifndef DIFFDRIVE_PADIHBOT__DIFFBOT_SYSTEM_HPP_
+#define DIFFDRIVE_PADIHBOT__DIFFBOT_SYSTEM_HPP_
 
 #include <memory>
 #include <string>
@@ -29,7 +29,7 @@
 #include "rclcpp/time.hpp"
 #include "rclcpp_lifecycle/node_interfaces/lifecycle_node_interface.hpp"
 #include "rclcpp_lifecycle/state.hpp"
-#include "diffdrive_agribot/visibility_control.h"
+#include "diffdrive_padihbot/visibility_control.h"
 
 #include "canalystii.hpp"
 #include "wheel.hpp"
@@ -38,9 +38,9 @@
 #include <mutex>
 #include <atomic>
 
-namespace diffdrive_agribot
+namespace diffdrive_padihbot
 {
-  class DiffDriveAgribotHardware : public hardware_interface::SystemInterface
+  class DiffDrivePadihbotHardware : public hardware_interface::SystemInterface
   {
 
     struct Config
@@ -56,43 +56,43 @@ namespace diffdrive_agribot
     };
 
   public:
-    RCLCPP_SHARED_PTR_DEFINITIONS(DiffDriveAgribotHardware)
+    RCLCPP_SHARED_PTR_DEFINITIONS(DiffDrivePadihbotHardware)
 
-    DIFFDRIVE_AGRIBOT_PUBLIC
+    DIFFDRIVE_PADIHBOT_PUBLIC
     hardware_interface::CallbackReturn on_init(
         const hardware_interface::HardwareInfo &info) override;
 
-    DIFFDRIVE_AGRIBOT_PUBLIC
+    DIFFDRIVE_PADIHBOT_PUBLIC
     std::vector<hardware_interface::StateInterface> export_state_interfaces() override;
 
-    DIFFDRIVE_AGRIBOT_PUBLIC
+    DIFFDRIVE_PADIHBOT_PUBLIC
     std::vector<hardware_interface::CommandInterface> export_command_interfaces() override;
 
-    DIFFDRIVE_AGRIBOT_PUBLIC
+    DIFFDRIVE_PADIHBOT_PUBLIC
     hardware_interface::CallbackReturn on_configure(
         const rclcpp_lifecycle::State &previous_state) override;
 
-    DIFFDRIVE_AGRIBOT_PUBLIC
+    DIFFDRIVE_PADIHBOT_PUBLIC
     hardware_interface::CallbackReturn on_cleanup(
         const rclcpp_lifecycle::State &previous_state) override;
 
-    DIFFDRIVE_AGRIBOT_PUBLIC
+    DIFFDRIVE_PADIHBOT_PUBLIC
     hardware_interface::CallbackReturn on_activate(
         const rclcpp_lifecycle::State &previous_state) override;
 
-    DIFFDRIVE_AGRIBOT_PUBLIC
+    DIFFDRIVE_PADIHBOT_PUBLIC
     hardware_interface::CallbackReturn on_deactivate(
         const rclcpp_lifecycle::State &previous_state) override;
 
-    DIFFDRIVE_AGRIBOT_PUBLIC
+    DIFFDRIVE_PADIHBOT_PUBLIC
     hardware_interface::CallbackReturn on_shutdown(
         const rclcpp_lifecycle::State &previous_state) override;
 
-    DIFFDRIVE_AGRIBOT_PUBLIC
+    DIFFDRIVE_PADIHBOT_PUBLIC
     hardware_interface::return_type read(
         const rclcpp::Time &time, const rclcpp::Duration &period) override;
 
-    DIFFDRIVE_AGRIBOT_PUBLIC
+    DIFFDRIVE_PADIHBOT_PUBLIC
     hardware_interface::return_type write(
         const rclcpp::Time &time, const rclcpp::Duration &period) override;
 
@@ -107,6 +107,6 @@ namespace diffdrive_agribot
     int m_initial_encoder_ticks_turret;
   };
 
-} // namespace diffdrive_agribot
+} // namespace diffdrive_padihbot
 
-#endif // DIFFDRIVE_AGRIBOT__DIFFBOT_SYSTEM_HPP_
+#endif // DIFFDRIVE_PADIHBOT__DIFFBOT_SYSTEM_HPP_

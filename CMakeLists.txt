@@ -28,28 +28,28 @@ set(LIBCONTROL_PATH "${PROJECT_SOURCE_DIR}/hardware/include")  # Adjust this pat
 find_library(CONTROL_CAN_LIB NAMES controlcan PATHS ${LIBCONTROL_PATH} NO_DEFAULT_PATH)
 
 add_library(
-  diffdrive_agribot
+  diffdrive_padihbot
   SHARED
   hardware/diffbot_system.cpp
   hardware/canalystii.cpp
 )
 
 # Link the controlcan library
-target_link_libraries(diffdrive_agribot PUBLIC ${CONTROL_CAN_LIB})
+target_link_libraries(diffdrive_padihbot PUBLIC ${CONTROL_CAN_LIB})
 
-target_compile_features(diffdrive_agribot PUBLIC cxx_std_17)
-target_include_directories(diffdrive_agribot PUBLIC
+target_compile_features(diffdrive_padihbot PUBLIC cxx_std_17)
+target_include_directories(diffdrive_padihbot PUBLIC
 $<BUILD_INTERFACE:${PROJECT_SOURCE_DIR}/hardware/include>
-$<INSTALL_INTERFACE:include/diffdrive_agribot>
+$<INSTALL_INTERFACE:include/diffdrive_padihbot>
 )
 ament_target_dependencies(
-  diffdrive_agribot PUBLIC
+  diffdrive_padihbot PUBLIC
   ${THIS_PACKAGE_INCLUDE_DEPENDS}
 )
 
 # Causes the visibility macros to use dllexport rather than dllimport,
 # which is appropriate when building the dll but not consuming it.
-target_compile_definitions(diffdrive_agribot PRIVATE "DIFFDRIVE_AGRIBOT_BUILDING_DLL")
+target_compile_definitions(diffdrive_padihbot PRIVATE "DIFFDRIVE_PADIHBOT_BUILDING_DLL")
 
 # # Custom command to create symbolic link for Gazebo meshes
 # set(INPUT_MESHES_DIR ${CMAKE_CURRENT_SOURCE_DIR})
@@ -57,7 +57,7 @@ target_compile_definitions(diffdrive_agribot PRIVATE "DIFFDRIVE_AGRIBOT_BUILDING
 # execute_process(COMMAND ${CMAKE_COMMAND} -E create_symlink ${INPUT_MESHES_DIR} ${OUTPUT_MESHES_SYMLINK})
 
 # Export hardware plugins
-pluginlib_export_plugin_description_file(hardware_interface diffdrive_agribot.xml)
+pluginlib_export_plugin_description_file(hardware_interface diffdrive_padihbot.xml)
 
 
 # INSTALL
@@ -67,10 +67,10 @@ install(
 )
 install(
   DIRECTORY hardware/include/
-  DESTINATION include/diffdrive_agribot
+  DESTINATION include/diffdrive_padihbot
 )
-install(TARGETS diffdrive_agribot
-  EXPORT export_diffdrive_agribot
+install(TARGETS diffdrive_padihbot
+  EXPORT export_diffdrive_padihbot
   ARCHIVE DESTINATION lib
   LIBRARY DESTINATION lib
   RUNTIME DESTINATION bin

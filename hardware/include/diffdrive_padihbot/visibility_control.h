@@ -19,38 +19,38 @@
  * library cannot have, but the consuming code must have inorder to link.
  */
 
-#ifndef DIFFDRIVE_AGRIBOT__VISIBILITY_CONTROL_H_
-#define DIFFDRIVE_AGRIBOT__VISIBILITY_CONTROL_H_
+#ifndef DIFFDRIVE_PADIHBOT__VISIBILITY_CONTROL_H_
+#define DIFFDRIVE_PADIHBOT__VISIBILITY_CONTROL_H_
 
 // This logic was borrowed (then namespaced) from the examples on the gcc wiki:
 //     https://gcc.gnu.org/wiki/Visibility
 
 #if defined _WIN32 || defined __CYGWIN__
 #ifdef __GNUC__
-#define DIFFDRIVE_AGRIBOT_EXPORT __attribute__((dllexport))
-#define DIFFDRIVE_AGRIBOT_IMPORT __attribute__((dllimport))
+#define DIFFDRIVE_PADIHBOT_EXPORT __attribute__((dllexport))
+#define DIFFDRIVE_PADIHBOT_IMPORT __attribute__((dllimport))
 #else
-#define DIFFDRIVE_AGRIBOT_EXPORT __declspec(dllexport)
-#define DIFFDRIVE_AGRIBOT_IMPORT __declspec(dllimport)
+#define DIFFDRIVE_PADIHBOT_EXPORT __declspec(dllexport)
+#define DIFFDRIVE_PADIHBOT_IMPORT __declspec(dllimport)
 #endif
-#ifdef DIFFDRIVE_AGRIBOT_BUILDING_DLL
-#define DIFFDRIVE_AGRIBOT_PUBLIC DIFFDRIVE_AGRIBOT_EXPORT
+#ifdef DIFFDRIVE_PADIHBOT_BUILDING_DLL
+#define DIFFDRIVE_PADIHBOT_PUBLIC DIFFDRIVE_PADIHBOT_EXPORT
 #else
-#define DIFFDRIVE_AGRIBOT_PUBLIC DIFFDRIVE_AGRIBOT_IMPORT
+#define DIFFDRIVE_PADIHBOT_PUBLIC DIFFDRIVE_PADIHBOT_IMPORT
 #endif
-#define DIFFDRIVE_AGRIBOT_PUBLIC_TYPE DIFFDRIVE_AGRIBOT_PUBLIC
-#define DIFFDRIVE_AGRIBOT_LOCAL
+#define DIFFDRIVE_PADIHBOT_PUBLIC_TYPE DIFFDRIVE_PADIHBOT_PUBLIC
+#define DIFFDRIVE_PADIHBOT_LOCAL
 #else
-#define DIFFDRIVE_AGRIBOT_EXPORT __attribute__((visibility("default")))
-#define DIFFDRIVE_AGRIBOT_IMPORT
+#define DIFFDRIVE_PADIHBOT_EXPORT __attribute__((visibility("default")))
+#define DIFFDRIVE_PADIHBOT_IMPORT
 #if __GNUC__ >= 4
-#define DIFFDRIVE_AGRIBOT_PUBLIC __attribute__((visibility("default")))
-#define DIFFDRIVE_AGRIBOT_LOCAL __attribute__((visibility("hidden")))
+#define DIFFDRIVE_PADIHBOT_PUBLIC __attribute__((visibility("default")))
+#define DIFFDRIVE_PADIHBOT_LOCAL __attribute__((visibility("hidden")))
 #else
-#define DIFFDRIVE_AGRIBOT_PUBLIC
-#define DIFFDRIVE_AGRIBOT_LOCAL
+#define DIFFDRIVE_PADIHBOT_PUBLIC
+#define DIFFDRIVE_PADIHBOT_LOCAL
 #endif
-#define DIFFDRIVE_AGRIBOT_PUBLIC_TYPE
+#define DIFFDRIVE_PADIHBOT_PUBLIC_TYPE
 #endif
 
-#endif  // DIFFDRIVE_AGRIBOT__VISIBILITY_CONTROL_H_
+#endif  // DIFFDRIVE_PADIHBOT__VISIBILITY_CONTROL_H_

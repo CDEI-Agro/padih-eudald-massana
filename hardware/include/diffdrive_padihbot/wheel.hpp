@@ -1,5 +1,5 @@
-#ifndef DIFFDRIVE_AGRIBOT_WHEEL_HPP
-#define DIFFDRIVE_AGRIBOT_WHEEL_HPP
+#ifndef DIFFDRIVE_PADIHBOT_WHEEL_HPP
+#define DIFFDRIVE_PADIHBOT_WHEEL_HPP
 
 #include <string>
 #include <cmath>
@@ -36,4 +36,4 @@ namespace motor_states{
       name = wheel_name;
     }
   };
-#endif // DIFFDRIVE_AGRIBOT_WHEEL_HPP
+#endif // DIFFDRIVE_PADIHBOT_WHEEL_HPP

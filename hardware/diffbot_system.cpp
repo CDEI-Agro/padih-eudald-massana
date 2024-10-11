@@ -12,7 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-#include "diffdrive_agribot/diffbot_system.hpp"
+#include "diffdrive_padihbot/diffbot_system.hpp"
 
 #include <chrono>
 #include <cmath>
@@ -23,9 +23,9 @@
 #include "hardware_interface/types/hardware_interface_type_values.hpp"
 #include "rclcpp/rclcpp.hpp"
 
-namespace diffdrive_agribot
+namespace diffdrive_padihbot
 {
-  hardware_interface::CallbackReturn DiffDriveAgribotHardware::on_init(
+  hardware_interface::CallbackReturn DiffDrivePadihbotHardware::on_init(
       const hardware_interface::HardwareInfo &info)
   {
     if (
@@ -64,7 +64,7 @@ namespace diffdrive_agribot
       if (joint.command_interfaces.size() != 1)
       {
         RCLCPP_FATAL(
-            rclcpp::get_logger("DiffDriveAgribotHardware"),
+            rclcpp::get_logger("DiffDrivePadihbotHardware"),
             "Joint '%s' has %zu command interfaces found. 1 expected.", joint.name.c_str(),
             joint.command_interfaces.size());
         return hardware_interface::CallbackReturn::ERROR;
@@ -73,7 +73,7 @@ namespace diffdrive_agribot
       if (joint.command_interfaces[0].name != hardware_interface::HW_IF_VELOCITY)
       {
         RCLCPP_FATAL(
-            rclcpp::get_logger("DiffDriveAgribotHardware"),
+            rclcpp::get_logger("DiffDrivePadihbotHardware"),
             "Joint '%s' have %s command interfaces found. '%s' expected.", joint.name.c_str(),
             joint.command_interfaces[0].name.c_str(), hardware_interface::HW_IF_VELOCITY);
         return hardware_interface::CallbackReturn::ERROR;
@@ -82,7 +82,7 @@ namespace diffdrive_agribot
       if (joint.state_interfaces.size() != 2)
       {
         RCLCPP_FATAL(
-            rclcpp::get_logger("DiffDriveAgribotHardware"),
+            rclcpp::get_logger("DiffDrivePadihbotHardware"),
             "Joint '%s' has %zu state interface. 2 expected.", joint.name.c_str(),
             joint.state_interfaces.size());
         return hardware_interface::CallbackReturn::ERROR;
@@ -91,7 +91,7 @@ namespace diffdrive_agribot
       if (joint.state_interfaces[0].name != hardware_interface::HW_IF_POSITION)
       {
         RCLCPP_FATAL(
-            rclcpp::get_logger("DiffDriveAgribotHardware"),
+            rclcpp::get_logger("DiffDrivePadihbotHardware"),
             "Joint '%s' have '%s' as first state interface. '%s' expected.", joint.name.c_str(),
             joint.state_interfaces[0].name.c_str(), hardware_interface::HW_IF_POSITION);
         return hardware_interface::CallbackReturn::ERROR;
@@ -100,7 +100,7 @@ namespace diffdrive_agribot
       if (joint.state_interfaces[1].name != hardware_interface::HW_IF_VELOCITY)
       {
         RCLCPP_FATAL(
-            rclcpp::get_logger("DiffDriveAgribotHardware"),
+            rclcpp::get_logger("DiffDrivePadihbotHardware"),
             "Joint '%s' have '%s' as second state interface. '%s' expected.", joint.name.c_str(),
             joint.state_interfaces[1].name.c_str(), hardware_interface::HW_IF_VELOCITY);
         return hardware_interface::CallbackReturn::ERROR;
@@ -110,7 +110,7 @@ namespace diffdrive_agribot
     return hardware_interface::CallbackReturn::SUCCESS;
   }
 
-  std::vector<hardware_interface::StateInterface> DiffDriveAgribotHardware::export_state_interfaces()
+  std::vector<hardware_interface::StateInterface> DiffDrivePadihbotHardware::export_state_interfaces()
   {
     std::vector<hardware_interface::StateInterface> state_interfaces;
 
@@ -127,7 +127,7 @@ namespace diffdrive_agribot
     return state_interfaces;
   }
 
-  std::vector<hardware_interface::CommandInterface> DiffDriveAgribotHardware::export_command_interfaces()
+  std::vector<hardware_interface::CommandInterface> DiffDrivePadihbotHardware::export_command_interfaces()
   {
     std::vector<hardware_interface::CommandInterface> command_interfaces;
 
@@ -140,66 +140,66 @@ namespace diffdrive_agribot
     return command_interfaces;
   }
 
-  hardware_interface::CallbackReturn DiffDriveAgribotHardware::on_configure(
+  hardware_interface::CallbackReturn DiffDrivePadihbotHardware::on_configure(
       const rclcpp_lifecycle::State & /*previous_state*/)
   {
-    RCLCPP_INFO(rclcpp::get_logger("DiffDriveAgribotHardware"), "Opening CAN DEVICE ...please wait...");
+    RCLCPP_INFO(rclcpp::get_logger("DiffDrivePadihbotHardware"), "Opening CAN DEVICE ...please wait...");
 
     // Have to check why the OpenCanDevice funtion returns 0 in any case but still opens the device
     if(canalystii_.open_can_device(0) == 0){
-      RCLCPP_INFO(rclcpp::get_logger("DiffDriveAgribotHardware"), "Opened CAN DEVICE");
+      RCLCPP_INFO(rclcpp::get_logger("DiffDrivePadihbotHardware"), "Opened CAN DEVICE");
     }
 
     return hardware_interface::CallbackReturn::SUCCESS;
   }
 
-  hardware_interface::CallbackReturn DiffDriveAgribotHardware::on_cleanup(
+  hardware_interface::CallbackReturn DiffDrivePadihbotHardware::on_cleanup(
       const rclcpp_lifecycle::State & /*previous_state*/)
   {
-    RCLCPP_INFO(rclcpp::get_logger("DiffDriveAgribotHardware"), "Cleaning up ...please wait...");
+    RCLCPP_INFO(rclcpp::get_logger("DiffDrivePadihbotHardware"), "Cleaning up ...please wait...");
 
 
     return hardware_interface::CallbackReturn::SUCCESS;
   }
 
-  hardware_interface::CallbackReturn DiffDriveAgribotHardware::on_activate(
+  hardware_interface::CallbackReturn DiffDrivePadihbotHardware::on_activate(
       const rclcpp_lifecycle::State & /*previous_state*/)
   {
-    RCLCPP_INFO(rclcpp::get_logger("DiffDriveAgribotHardware"), "Initializing and Starting CAN device ...please wait...");
+    RCLCPP_INFO(rclcpp::get_logger("DiffDrivePadihbotHardware"), "Initializing and Starting CAN device ...please wait...");
 
 
     if(canalystii_.init_can_device(can_config_)==1){
-      RCLCPP_INFO(rclcpp::get_logger("DiffDriveAgribotHardware"), "Initialized CAN Device");
+      RCLCPP_INFO(rclcpp::get_logger("DiffDrivePadihbotHardware"), "Initialized CAN Device");
     }
 
     if(canalystii_.start_can_device(0)==1){
-      RCLCPP_INFO(rclcpp::get_logger("DiffDriveAgribotHardware"), "Started CAN Device");
+      RCLCPP_INFO(rclcpp::get_logger("DiffDrivePadihbotHardware"), "Started CAN Device");
     }
 
     return hardware_interface::CallbackReturn::SUCCESS;
   }
 
-  hardware_interface::CallbackReturn DiffDriveAgribotHardware::on_deactivate(
+  hardware_interface::CallbackReturn DiffDrivePadihbotHardware::on_deactivate(
       const rclcpp_lifecycle::State & /*previous_state*/)
   {
-    RCLCPP_INFO(rclcpp::get_logger("DiffDriveAgribotHardware"), "Deactivating ...please wait...");
+    RCLCPP_INFO(rclcpp::get_logger("DiffDrivePadihbotHardware"), "Deactivating ...please wait...");
     
 
-    RCLCPP_INFO(rclcpp::get_logger("DiffDriveAgribotHardware"), "Successfully deactivated CAN thread!");
+    RCLCPP_INFO(rclcpp::get_logger("DiffDrivePadihbotHardware"), "Successfully deactivated CAN thread!");
 
     return hardware_interface::CallbackReturn::SUCCESS;
   }
 
-  hardware_interface::CallbackReturn DiffDriveAgribotHardware::on_shutdown(
+  hardware_interface::CallbackReturn DiffDrivePadihbotHardware::on_shutdown(
       const rclcpp_lifecycle::State & /*previous_state*/)
   {
 
-  RCLCPP_INFO(rclcpp::get_logger("DiffDriveAgribotHardware"), "Successfully shutdown.");
+  RCLCPP_INFO(rclcpp::get_logger("DiffDrivePadihbotHardware"), "Successfully shutdown.");
 
     return hardware_interface::CallbackReturn::SUCCESS;
   }
 
-  hardware_interface::return_type DiffDriveAgribotHardware::read(
+  hardware_interface::return_type DiffDrivePadihbotHardware::read(
       const rclcpp::Time & /*time*/, const rclcpp::Duration &period)
   {
 
@@ -211,17 +211,17 @@ namespace diffdrive_agribot
     return hardware_interface::return_type::OK;
   }
 
-  hardware_interface::return_type diffdrive_agribot ::DiffDriveAgribotHardware::write(
+  hardware_interface::return_type DiffDrivePadihbotHardware::write(
       const rclcpp::Time & /*time*/, const rclcpp::Duration &period)
   {
 
-      RCLCPP_INFO(rclcpp::get_logger("DiffDriveAgribotHardware"), "Right and left wheel velocitites  %f   %f", wheel_r_.cmd, wheel_l_.cmd);
+      RCLCPP_INFO(rclcpp::get_logger("DiffDrivePadihbotHardware"), "Right and left wheel velocitites  %f   %f", wheel_r_.cmd, wheel_l_.cmd);
 
 
       int wheel_l_rpm =  static_cast<int>((wheel_l_.cmd*60)/(2*M_PI*cfg_.wheel_radius));
       int wheel_r_rpm =  static_cast<int>((wheel_r_.cmd*60)/(2*M_PI*cfg_.wheel_radius));
 
-      RCLCPP_INFO(rclcpp::get_logger("DiffDriveAgribotHardware"), "Right and left wheel RPMs  %d   %d", wheel_r_rpm, wheel_l_rpm);
+      RCLCPP_INFO(rclcpp::get_logger("DiffDrivePadihbotHardware"), "Right and left wheel RPMs  %d   %d", wheel_r_rpm, wheel_l_rpm);
 
 
     canalystii_.send_can_message(0, wheel_l_rpm, wheel_r_rpm);
@@ -231,8 +231,8 @@ namespace diffdrive_agribot
     return hardware_interface::return_type::OK;
   }
 
-} // namespace diffdrive_agribot
+} // namespace diffdrive_padihbot
 
 #include "pluginlib/class_list_macros.hpp"
 PLUGINLIB_EXPORT_CLASS(
-    diffdrive_agribot::DiffDriveAgribotHardware, hardware_interface::SystemInterface)
+    diffdrive_padihbot::DiffDrivePadihbotHardware, hardware_interface::SystemInterface)
