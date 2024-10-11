@@ -23,7 +23,7 @@ from launch.substitutions import Command, FindExecutable, PathJoinSubstitution
 
 def generate_launch_description():
     # Get the launch directory
-    gps_wpf_dir = get_package_share_directory("agri_bot")
+    gps_wpf_dir = get_package_share_directory("padih_bot")
     launch_dir = os.path.join(gps_wpf_dir, 'launch')
     world = os.path.join(gps_wpf_dir, "worlds", "sonoma_raceway.world")
 

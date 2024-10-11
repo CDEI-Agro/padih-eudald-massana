@@ -36,7 +36,7 @@ def generate_launch_description():
         raise ValueError("ros_domain_id must be either '1' or '2', '10' or '11'. Please set ros domain id"
                          "by running the following command: set_moby_model GREEN or set_moby_model RED or export ROS_DOMAIN_ID= ros_domain_id")
 
-    package_path = FindPackageShare("agri_bot")
+    package_path = FindPackageShare("padih_bot")
     params_file = PathJoinSubstitution([package_path, 'config/diffdrive_controllers.yaml'])
 
     # Declare arguments
@@ -57,7 +57,7 @@ def generate_launch_description():
             PathJoinSubstitution([FindExecutable(name="xacro")]),
             " ",
             PathJoinSubstitution(
-                [FindPackageShare("agri_bot"), "src/description", "agri_bot.urdf.xacro"]
+                [FindPackageShare("padih_bot"), "src/description", "agri_bot.urdf.xacro"]
             ),
             " ",
             "use_mock_hardware:=false",

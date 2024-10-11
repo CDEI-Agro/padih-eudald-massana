@@ -67,7 +67,7 @@ def generate_launch_description():
     # Include platform launch file
     sim_platform_launch = IncludeLaunchDescription(
         PythonLaunchDescriptionSource([
-            PathJoinSubstitution([FindPackageShare('agri_bot'), 'launch', 'sim.launch.py'])
+            PathJoinSubstitution([FindPackageShare('padih_bot'), 'launch', 'sim.launch.py'])
         ]),
     launch_arguments={'world': world_file}.items(),
     condition=IfCondition(simulation_mode)
@@ -75,7 +75,7 @@ def generate_launch_description():
 
     real_platform_launch = IncludeLaunchDescription(
         PythonLaunchDescriptionSource([
-            PathJoinSubstitution([FindPackageShare('agri_bot'), 'launch', 'diffbot.launch.py'])
+            PathJoinSubstitution([FindPackageShare('padih_bot'), 'launch', 'diffbot.launch.py'])
         ]),
         launch_arguments={'odom_tf_from_controller':odom_tf_from_controller}.items(),
         condition=UnlessCondition(simulation_mode)
@@ -83,7 +83,7 @@ def generate_launch_description():
 
     sensors_launch = IncludeLaunchDescription(
         PythonLaunchDescriptionSource([
-            PathJoinSubstitution([FindPackageShare('agri_bot'), 'launch', 'sensors.launch.py'])
+            PathJoinSubstitution([FindPackageShare('padih_bot'), 'launch', 'sensors.launch.py'])
         ]),
         launch_arguments={'ouster': ouster_arg, 'ublox': ublox_arg}.items(),
         condition=UnlessCondition(simulation_mode)

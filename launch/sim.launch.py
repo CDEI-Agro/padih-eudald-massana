@@ -12,7 +12,7 @@ from launch_ros.actions import Node
 
 def generate_launch_description():
 
-    package_path = get_package_share_directory("agri_bot")
+    package_path = get_package_share_directory("padih_bot")
     launch_dir = os.path.join(package_path, 'launch')
 
     # Declaring arguments of the launch file
@@ -68,11 +68,11 @@ def generate_launch_description():
     )
     
     # Run the spawner node from the gazebo_ros package.
-    spawn_agri_bot = Node(
+    spawn_padih_bot = Node(
         package='gazebo_ros',
         executable='spawn_entity.py',
         arguments=['-topic', 'robot_description',
-                    '-entity', 'agri_bot',
+                    '-entity', 'padih_bot',
                    '-timeout', '200',
                     '-x', '0.0',
                     '-y', '0.0',
@@ -83,7 +83,7 @@ def generate_launch_description():
     nodes = [
         start_gazebo_server_cmd,
         start_gazebo_client_cmd,
-        spawn_agri_bot,
+        spawn_padih_bot,
         joint_state_broadcaster_spawner,
         robot_state_publisher,
         diff_drive_spawner,

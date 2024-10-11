@@ -5,7 +5,7 @@ import os
 
 
 def generate_launch_description():
-    pkg_share = launch_ros.substitutions.FindPackageShare(package='agri_bot').find('agri_bot')
+    pkg_share = launch_ros.substitutions.FindPackageShare(package='padih_bot').find('padih_bot')
     default_model_path = os.path.join(pkg_share, 'src/description/agri_bot_description.urdf')
     default_rviz_config_path = os.path.join(pkg_share, 'rviz/navigation.rviz')
     world_path = os.path.join(pkg_share, 'worlds/test_world.sdf')
@@ -20,7 +20,7 @@ def generate_launch_description():
     spawn_entity = launch_ros.actions.Node(
         package='gazebo_ros',
         executable='spawn_entity.py',
-        arguments=['-entity', 'agri_bot', '-topic', 'robot_description'],
+        arguments=['-entity', 'padih_bot', '-topic', 'robot_description'],
         output='screen',
         namespace=LaunchConfiguration('namespace')
     )
@@ -40,7 +40,7 @@ def generate_launch_description():
                                             description='Absolute path to rviz config file'),
         launch.actions.DeclareLaunchArgument(name='use_sim_time', default_value='True',
                                             description='Flag to enable use_sim_time'),
-        launch.actions.DeclareLaunchArgument(name='namespace', default_value='/agri_bot',
+        launch.actions.DeclareLaunchArgument(name='namespace', default_value='/padih_bot',
                                              description='Namespace to launch under'),
         launch.actions.ExecuteProcess(
             cmd=['gazebo', '--verbose', '-s', 'libgazebo_ros_init.so', '-s', 'libgazebo_ros_factory.so', world_path], output='screen'),

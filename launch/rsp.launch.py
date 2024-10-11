@@ -26,7 +26,7 @@ def generate_launch_description():
          # add space. The idea is the run the whole thing as a command you would on a command line
         " ",
          # get path to the robot description xacro file
-        PathJoinSubstitution([FindPackageShare("agri_bot"), "src/description", "agri_bot.urdf.xacro"])
+        PathJoinSubstitution([FindPackageShare("padih_bot"), "src/description", "agri_bot.urdf.xacro"])
         ]
     )
 

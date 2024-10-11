@@ -16,7 +16,7 @@ def generate_launch_description():
                          "by running the following command: set_moby_model GREEN or set_moby_model RED or export ROS_DOMAIN_ID= ros_domain_id")
 
     # get paths
-    package_path = FindPackageShare("agri_bot")
+    package_path = FindPackageShare("padih_bot")
     general_params = PathJoinSubstitution([package_path, 'config/general_params.yaml'])
     rviz_config_file = PathJoinSubstitution([package_path, 'rviz/navigation.rviz'])
 
@@ -65,7 +65,7 @@ def generate_launch_description():
     # Include platform launch file
     platform_launch = IncludeLaunchDescription(
         PythonLaunchDescriptionSource([
-            PathJoinSubstitution([FindPackageShare('agri_bot'), 'launch', 'platform.launch.py'])
+            PathJoinSubstitution([FindPackageShare('padih_bot'), 'launch', 'platform.launch.py'])
         ]),
         launch_arguments={'sim': simulation_mode,
                           'odom_tf_from_controller': odom_tf_from_controller}.items()
@@ -73,7 +73,7 @@ def generate_launch_description():
 
     ekf_localizer_launch = IncludeLaunchDescription(
         PythonLaunchDescriptionSource([
-            PathJoinSubstitution([FindPackageShare('agri_bot'), 'launch', 'dual_ekf_navsat.launch.py']),
+            PathJoinSubstitution([FindPackageShare('padih_bot'), 'launch', 'dual_ekf_navsat.launch.py']),
         ]),
         launch_arguments={'use_sim_time': simulation_mode,
                           'odom_tf_from_controller': odom_tf_from_controller,
@@ -81,7 +81,7 @@ def generate_launch_description():
     )
 
     joystick_and_gps_adapter = Node(
-        package="agri_bot",
+        package="padih_bot",
         executable="joy_gps_adapter.py",
         name='turret_joy',
         parameters=[general_params,]
