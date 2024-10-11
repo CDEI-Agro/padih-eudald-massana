@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<robot name="agri_bot" xmlns:xacro="http://ros.org/wiki/xacro">
+<robot name="padih_bot" xmlns:xacro="http://ros.org/wiki/xacro">
 
     <xacro:property name="M_PI" value="3.1415926535897931"/>
 
@@ -10,14 +10,12 @@
     <xacro:arg name="ros_domain_id" default=" "/>
     <xacro:property name="robot_id" value="$(arg ros_domain_id)"/>
 
-    <xacro:include filename="agri_bot_colors.xacro"/>
-    <xacro:include filename="agri_bot_inertias.xacro"/>
+    <xacro:include filename="padih_bot_colors.xacro"/>
+    <xacro:include filename="padih_bot_inertias.xacro"/>
 
-    <xacro:include filename="agri_bot_core.xacro"/>
+    <xacro:include filename="padih_bot_core.xacro"/>
     <xacro:include filename="gps.xacro"/>
     <xacro:include filename="OS1-32.xacro"/>
-    <!--        <xacro:include filename="camera.xacro" />-->
-    <!-- <xacro:include filename="gazebo_diff_drive_control.xacro" /> -->
     <xacro:include filename="agribot_diffdrive_control.xacro"/>
 
 </robot>

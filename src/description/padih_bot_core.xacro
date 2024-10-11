@@ -14,14 +14,14 @@
         <visual>
             <origin xyz="0 0 0" rpy="0 0 0"/>
             <geometry>
-                <mesh filename="package://agri_bot/src/meshes/base_link.STL"/>
+                <mesh filename="package://padih_bot/src/meshes/base_link.STL"/>
             </geometry>
             <material name="green"/>
         </visual>
         <collision>
             <origin xyz="0 0 0" rpy="0 0 0"/>
             <geometry>
-                <mesh filename="package://agri_bot/src/meshes/base_link.STL"/>
+                <mesh filename="package://padih_bot/src/meshes/base_link.STL"/>
             </geometry>
         </collision>
 
@@ -47,14 +47,14 @@
         <visual>
             <origin xyz="0 0 0" rpy="0 0 0"/>
             <geometry>
-                <mesh filename="package://agri_bot/src/meshes/turret_link.STL"/>
+                <mesh filename="package://padih_bot/src/meshes/turret_link.STL"/>
             </geometry>
             <material name="yellow"/>
         </visual>
         <collision>
             <origin xyz="0 0 0" rpy="0 0 0"/>
             <geometry>
-                <mesh filename="package://agri_bot/src/meshes/turret_link.STL"/>
+                <mesh filename="package://padih_bot/src/meshes/turret_link.STL"/>
             </geometry>
         </collision>
 
@@ -98,7 +98,7 @@
         <visual>
             <origin xyz="0 0 0" rpy="0 0 0"/>
             <geometry>
-                <mesh filename="package://agri_bot/src/meshes/lidar-link.STL"/>
+                <mesh filename="package://padih_bot/src/meshes/lidar-link.STL"/>
             </geometry>
             <material name="">
                 <material name="yellow"/>
@@ -107,7 +107,7 @@
         <collision>
             <origin xyz="0 0 0" rpy="0 0 0"/>
             <geometry>
-                <mesh filename="package://agri_bot/src/meshes/lidar-link.STL"/>
+                <mesh filename="package://padih_bot/src/meshes/lidar-link.STL"/>
             </geometry>
         </collision>
     </link>
@@ -132,14 +132,14 @@
         <visual>
             <origin xyz="0 0 0" rpy="0 0 0"/>
             <geometry>
-                <mesh filename="package://agri_bot/src/meshes/right_wheel_link.STL"/>
+                <mesh filename="package://padih_bot/src/meshes/right_wheel_link.STL"/>
             </geometry>
             <material name="blue"/>
         </visual>
         <collision>
             <origin xyz="0 0 0" rpy="0 0 0"/>
             <geometry>
-                <mesh filename="package://agri_bot/src/meshes/right_wheel_link.STL"/>
+                <mesh filename="package://padih_bot/src/meshes/right_wheel_link.STL"/>
             </geometry>
         </collision>
 
@@ -174,14 +174,14 @@
         <visual>
             <origin xyz="0 0 0" rpy="0 0 0"/>
             <geometry>
-                <mesh filename="package://agri_bot/src/meshes/left_wheel_link.STL"/>
+                <mesh filename="package://padih_bot/src/meshes/left_wheel_link.STL"/>
             </geometry>
             <material name="blue"/>
         </visual>
         <collision>
             <origin xyz="0 0 0" rpy="0 0 0"/>
             <geometry>
-                <mesh filename="package://agri_bot/src/meshes/left_wheel_link.STL"/>
+                <mesh filename="package://padih_bot/src/meshes/left_wheel_link.STL"/>
             </geometry>
         </collision>
 
@@ -216,14 +216,14 @@
         <visual>
             <origin xyz="0 0 0" rpy="0 0 0"/>
             <geometry>
-                <mesh filename="package://agri_bot/src/meshes/caster_wheel_link.STL"/>
+                <mesh filename="package://padih_bot/src/meshes/caster_wheel_link.STL"/>
             </geometry>
             <material name="cyan"/>
         </visual>
         <collision>
             <origin xyz="0 0 0" rpy="0 0 0"/>
             <geometry>
-                <mesh filename="package://agri_bot/src/meshes/caster_wheel_link.STL"/>
+                <mesh filename="package://padih_bot/src/meshes/caster_wheel_link.STL"/>
             </geometry>
         </collision>
 

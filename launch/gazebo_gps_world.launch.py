@@ -32,7 +32,7 @@ def generate_launch_description():
         # The idea is to run the whole thing as a command you would type in the terminal
         [FindExecutable(name="xacro"), # get path to the executable /opt/ros/humble/bin/xacro
         " ", # add space
-        PathJoinSubstitution([gps_wpf_dir, "src/description", "agri_bot.urdf.xacro"]), # get path to the robot description xacro file
+        PathJoinSubstitution([gps_wpf_dir, "src/description", "padih_bot.urdf.xacro"]), # get path to the robot description xacro file
          " ",
          "simulation:=true"
          ]

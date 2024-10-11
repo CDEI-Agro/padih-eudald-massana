@@ -60,7 +60,7 @@
         to launch a controller manager before launchin controllers-->
         <gazebo>
             <plugin name="gazebo_ros2_control" filename="libgazebo_ros2_control.so">
-                <parameters>$(find agri_bot)/config/diffdrive_controllers.yaml</parameters>
+                <parameters>$(find padih_bot)/config/diffdrive_controllers.yaml</parameters>
                 <ros>
                     <remapping>/diffbot_base_controller/odom:=/controller/odometry</remapping>
                 </ros>

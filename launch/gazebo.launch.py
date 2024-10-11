@@ -6,7 +6,7 @@ import os
 
 def generate_launch_description():
     pkg_share = launch_ros.substitutions.FindPackageShare(package='padih_bot').find('padih_bot')
-    default_model_path = os.path.join(pkg_share, 'src/description/agri_bot_description.urdf')
+    default_model_path = os.path.join(pkg_share, 'src/description/padih_bot_description.urdf')
     default_rviz_config_path = os.path.join(pkg_share, 'rviz/navigation.rviz')
     world_path = os.path.join(pkg_share, 'worlds/test_world.sdf')
 
